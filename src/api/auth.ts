@@ -1,5 +1,6 @@
+const BASE_URL = import.meta.env.VITE_API_BASE;
 export async function login(clientId: string, clientSecret: string): Promise<any> {
-  const res = await fetch('/feishu-api/auth/v1/appToken', {
+  const res = await fetch(`${BASE_URL}/auth/v1/appToken`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ clientId, clientSecret }),

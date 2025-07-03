@@ -1,7 +1,8 @@
 import { requestWithToken } from './auth';
+const BASE_URL = import.meta.env.VITE_API_BASE;
 export async function getTableData() {
     const res = await requestWithToken(
-        '/feishu-api/api/data/v1/namespaces/package_d6426c__c/meta/objects/object_cbb246f2bd1',
+        `${BASE_URL}/api/data/v1/namespaces/package_d6426c__c/meta/objects/object_cbb246f2bd1`,
         { method: 'GET' }
     );
     const data = await res.json();
