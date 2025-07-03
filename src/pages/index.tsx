@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import AntdTableDemo from '../components/AntdTableDemo.tsx';
 
-const { Sider, Content } = Layout;
-
+// const { Sider, Content } = Layout;
+const { Sider } = Layout;
 const menuItems = [
     { key: '1', label: '获取对象元数据' },
     // 可以继续添加菜单项
