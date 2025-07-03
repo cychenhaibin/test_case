@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "./",
+  "homepage": "https://cychenhaibin.github.io/test_case",
   "scripts": {
     "dev": "vite",
     "predeploy" : "npm run build",
