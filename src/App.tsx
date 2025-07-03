@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import AppRoutes from './route';
 
 const App: React.FC = () => (
-  <BrowserRouter>
+  <HashRouter>
     <AppRoutes />
-  </BrowserRouter>
+  </HashRouter>
 );
 
 export default App;
