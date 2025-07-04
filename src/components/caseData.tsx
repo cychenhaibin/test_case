@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Checkbox, Button, Space, Input, message, Select } from 'antd';
+import { Table, Button, Space, Input, message, Select } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { getCaseData, deleteRecord } from '../api';
 import { useApiNameStore } from '../store/apiNameStore';
@@ -8,20 +8,9 @@ import EditModal from './editModal';
 import { useNavigate } from 'react-router-dom';
 import defaultNewRecord from './defaultNewRecord';
 
-interface FieldType {
-  apiName: string;
-  label: { zh_CN: string; en_US: string };
-  type: { name: string; settings: any };
-  createdAt: number;
-  updatedAt: number;
-}
-
 const caseData: React.FC = () => {
   const [fields, setFields] = useState<any[]>([]);
   const [settingsKeys, setSettingsKeys] = useState<string[]>([]);
-  const [editingKey, setEditingKey] = useState<string | null>(null);
-  const [editCache, setEditCache] = useState<Partial<FieldType>>({});
-  const [objectEditCache, setObjectEditCache] = useState<Record<string, string>>({});
 
   // 新增：所有参数的 state
   const [usePageToken, setUsePageToken] = useState(false);
@@ -172,29 +161,14 @@ const caseData: React.FC = () => {
         Object.keys(item.type?.settings || {}).forEach((key: string) => keysSet.add(key));
       });
       setSettingsKeys(Array.from(keysSet));
+      console.log(settingsKeys);
     });
   };
 
   // 初次加载自动查询
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line
   }, []);
-
-
-  const edit = (record: FieldType) => {
-    setEditingKey(record.apiName);
-    setEditCache({ ...record });
-    // 初始化对象类型字段的 JSON 字符串
-    const objCache: Record<string, string> = {};
-    settingsKeys.forEach(key => {
-      const v = record.type.settings?.[key];
-      if (typeof v === 'object' && v !== undefined) {
-        objCache[key] = JSON.stringify(v, null, 2);
-      }
-    });
-    setObjectEditCache(objCache);
-  };
 
 
   const handleDelete = async (_id: string) => {
@@ -379,6 +353,7 @@ const caseData: React.FC = () => {
         mode={editModalTitle === '新建' ? 'create' : 'edit'}
         onOk={data => {
           // 保存/新建逻辑
+          console.log(data)
           // 区分是编辑还是新建
           setEditModalVisible(false);
           // 保存后刷新数据

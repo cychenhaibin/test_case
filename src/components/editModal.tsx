@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Form, Input, InputNumber, Switch } from 'antd';
 import { editRecord, createRecord } from '../api';
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Checkbox, Button, Space, Input, message } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Checkbox, Input } from 'antd';
 import { getTableData } from '../api';
 import { useApiNameStore } from '../store/apiNameStore';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +14,7 @@ interface FieldType {
 const metaData: React.FC = () => {
   const [fields, setFields] = useState<FieldType[]>([]);
   const [settingsKeys, setSettingsKeys] = useState<string[]>([]);
-  const [editingKey, setEditingKey] = useState<string | null>(null);
+  const [editingKey] = useState<string | null>(null);
   const [editCache, setEditCache] = useState<Partial<FieldType>>({});
   const [objectEditCache, setObjectEditCache] = useState<Record<string, string>>({});
   const setApiNameList = useApiNameStore(state => state.setApiNameList);
@@ -41,66 +40,6 @@ const metaData: React.FC = () => {
 
   // 编辑相关方法
   const isEditing = (record: FieldType) => record.apiName === editingKey;
-
-  const edit = (record: FieldType) => {
-    setEditingKey(record.apiName);
-    setEditCache({ ...record });
-    // 初始化对象类型字段的 JSON 字符串
-    const objCache: Record<string, string> = {};
-    settingsKeys.forEach(key => {
-      const v = record.type.settings?.[key];
-      if (typeof v === 'object' && v !== undefined) {
-        objCache[key] = JSON.stringify(v, null, 2);
-      }
-    });
-    setObjectEditCache(objCache);
-  };
-
-  const cancel = () => {
-    setEditingKey(null);
-    setEditCache({});
-    setObjectEditCache({});
-  };
-
-  const save = (apiName: string) => {
-    // 检查对象类型字段的 JSON 是否有效
-    let parsedSettings: Record<string, any> = { ...editCache.type?.settings };
-    for (const key of settingsKeys) {
-      if (objectEditCache[key] !== undefined) {
-        try {
-          parsedSettings[key] = JSON.parse(objectEditCache[key]);
-        } catch (e) {
-          message.error(`字段 ${key} 不是有效的 JSON 格式！`);
-          return;
-        }
-      }
-    }
-    setFields(prev => prev.map(item => {
-      if (item.apiName === apiName) {
-        return {
-          ...item,
-          ...editCache,
-          label: {
-            zh_CN: editCache.label?.zh_CN ?? item.label.zh_CN,
-            en_US: editCache.label?.en_US ?? item.label.en_US
-          },
-          type: {
-            ...item.type,
-            ...editCache.type,
-            settings: {
-              ...item.type.settings,
-              ...editCache.type?.settings,
-              ...parsedSettings
-            }
-          }
-        };
-      }
-      return item;
-    }));
-    setEditingKey(null);
-    setEditCache({});
-    setObjectEditCache({});
-  };
 
   // 基础字段
   const baseColumns = [
