@@ -1,0 +1,7 @@
+// :global(body .ant-table),
+// :global(body .ant-table-wrapper .ant-table),
+:global(body .ant-table.ant-table-small) {
+  margin-inline: 0 !important;
+  margin-block: 0 !important;
+  margin: 0 !important;
+}

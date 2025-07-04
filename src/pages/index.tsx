@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import AntdTableDemo from '../components/AntdTableDemo.tsx';
+import { Layout, Tabs } from 'antd';
+import MetaData from '../components/metaData.tsx';
+import CaseData from '../components/caseData.tsx';
 
-// const { Sider, Content } = Layout;
-const { Sider } = Layout;
 const menuItems = [
-    { key: '1', label: '获取对象元数据' },
+    { key: '1', label: '对象元数据' },
+    { key: '2', label: 'case展示' },
     // 可以继续添加菜单项
 ];
 
@@ -14,6 +14,7 @@ const menuItems = [
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState<string | null>(null);
+    const [activeKey, setActiveKey] = useState('1');
     useEffect(() => {
         const t = localStorage.getItem('accessToken');
         if (!t) {
@@ -24,20 +25,22 @@ const HomePage: React.FC = () => {
     }, [navigate]);
     if (!token) return null;
     return (
-        <Layout style={{ minHeight: '100vh', width: '100vw' }}>
-            <Sider width={200} style={{ background: '#fff' }}>
-                <Menu
-                    mode="inline"
-                    defaultSelectedKeys={['1']}
-                    style={{ height: '100%', borderRight: 0 }}
-                    items={menuItems}
-                />
-            </Sider>
-            <Layout style={{ width: '100%', padding: '0 12px' }}>
-                <div style={{ minHeight: 280 }}>
-                    <AntdTableDemo />
-                </div>
-            </Layout>
+        <Layout style={{ minHeight: '100vh', width: '100vw', padding: '40px 100px', background: '#fff' }}>
+            <Tabs
+                tabPosition="top"
+                activeKey={activeKey}
+                onChange={setActiveKey}
+                items={menuItems.map(item => ({
+                    key: item.key,
+                    label: item.label,
+                    children: (
+                        <div style={{ minHeight: 280 }}>
+                            {item.key === '1' ? <MetaData /> : <CaseData />}
+                        </div>
+                    )
+                }))}
+                style={{ background: '#fff' }}
+            />
         </Layout>
     );
 };
