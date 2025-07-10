@@ -18,5 +18,5 @@ export default defineConfig({
       }
     },
   },
-  base: '/test_case/',
+  base: './',
 })
