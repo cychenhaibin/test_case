@@ -1,12 +1,11 @@
-import axios from 'axios';
-const BASE_URL = import.meta.env.VITE_API_BASE;
-console.log('VITE_API_BASE', BASE_URL);
+import api from './axiosInstance';
+
+console.log('VITE_API_BASE', import.meta.env.VITE_API_BASE);
+
 export async function login(clientId: string, clientSecret: string): Promise<any> {
-  const res = await axios.post(`${BASE_URL}/auth/v1/appToken`, {
+  const res = await api.post('/auth/v1/appToken', {
     clientId,
     clientSecret,
-  }, {
-    headers: { 'Content-Type': 'application/json' },
   });
   const data = res.data;
   if (data.code === '0' && data.data?.accessToken) {
@@ -27,7 +26,7 @@ export async function requestWithToken(url: string, options: RequestInit = {}) {
   }
   headers['Authorization'] = token || '';
 
-  return axios({
+  return api({
     url,
     method: options.method || 'GET',
     headers,
