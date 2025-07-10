@@ -6,7 +6,7 @@ import { login } from '../api/auth';
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
+
 
   const onFinish = async (values: { clientId: string; clientSecret: string }) => {
     setLoading(true);
@@ -14,15 +14,17 @@ const Login: React.FC = () => {
       const res = await login(values.clientId, values.clientSecret);
       if (res?.code === '0') {
         localStorage.setItem('accessToken', res?.data.accessToken);
+        localStorage.setItem('showFieldRuleModal', '1'); // 新增
         console.log(res?.data.accessToken);
-        message.success({content: '登录成功', key: 'login'});
+        message.success(res?.msg || '登录成功');
         navigate('/index');
       } else {
-        message.error({content: res?.msg || '登录失败', key: 'login'});
+        console.log('login error', res?.msg);
+        message.error(res?.msg || '登录失败');
       }
     } catch (e: any) {
       console.log(e);
-      message.error({content: e || '登录失败', key: 'login'});
+      message.error(e || '登录失败');
     } finally {
       setLoading(false);
     }

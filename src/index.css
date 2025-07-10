@@ -28,6 +28,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -52,6 +54,23 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.api-menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  transition: background 0.2s;
+}
+.api-menu-item.selected {
+  background: #e6f4ff !important;
+  color: #1677ff !important;
+  border-radius: 8px;
+}
+.api-menu-item:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-radius: 8px;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,28 +1,28 @@
 const defaultNewRecord = {
-    "_createdAt": null,
-    "_createdBy": {
-      "_id": "",
-      "_name": {
-        "en_us": "",
-        "zh_cn": ""
-      }
-    },
-    "_id": "",
-    "_name": {
-      "zh_cn": ""
-    },
-    "_updatedAt": null,
-    "_updatedBy": {
-      "_id": "",
-      "_name": {}
-    },
+    // "_createdAt": null,
+    // "_createdBy": {
+    //   "_id": "",
+    //   "_name": {
+    //     "en_us": "",
+    //     "zh_cn": ""
+    //   }
+    // },
+    // "_id": "",
+    // "_name": {
+    //   "zh_cn": ""
+    // },
+    // "_updatedAt": null,
+    // "_updatedBy": {
+    //   "_id": "",
+    //   "_name": {}
+    // },
     "attachment_75204baa676": [],
     "autoid_aa676d22d35": "",
     "avatar_280f2783b49": {
-      "color": null,
-      "color_id": null,
+      "color": "",
+      "color_id": "",
       "content": [],
-      "image": null,
+      "image": "",
       "source": ""
     },
     "bigint_7d6a33398bf": "",

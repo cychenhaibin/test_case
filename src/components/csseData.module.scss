@@ -5,3 +5,16 @@
   margin-block: 0 !important;
   margin: 0 !important;
 }
+
+:global(.ant-btn-primary:hover) {
+  border-color: transparent !important;
+}
+
+:global(.ant-btn:focus) {
+  outline: none !important;
+}
+
+.diffHighlight {
+  background: #fffbe6 !important;
+  border-radius: 4px;
+}

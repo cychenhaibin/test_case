@@ -19,12 +19,14 @@ const metaData: React.FC = () => {
   const [objectEditCache, setObjectEditCache] = useState<Record<string, string>>({});
   const setApiNameList = useApiNameStore(state => state.setApiNameList);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     getTableData().then(res => {
       if (res.code === 'k_ident_013000') {
         navigate('/login');
         return;
       }
+      setLoading(true);
       const data = res.data?.fields || [];
       setFields(data);
       setApiNameList(data.map((item: FieldType) => item.apiName));
@@ -35,6 +37,7 @@ const metaData: React.FC = () => {
         Object.keys(item.type.settings || {}).forEach(key => keysSet.add(key));
       });
       setSettingsKeys(Array.from(keysSet));
+      setLoading(false);
     });
   }, []);
 
@@ -178,7 +181,7 @@ const metaData: React.FC = () => {
         }))} style={{ width: '100%' }} />;
       }
       if (typeof value === 'object') {
-        return JSON.stringify(value);
+        return <pre style={{ margin: 0 }}>{JSON.stringify(value, null, 2)}</pre>;
       }
       return String(value);
     }
@@ -223,6 +226,7 @@ const metaData: React.FC = () => {
       dataSource={fields}
       columns={columns}
       rowKey="apiName"
+      loading={loading}
       scroll={{ x: 'max-content' }}
       pagination={{ pageSize: 12 }}
       bordered
