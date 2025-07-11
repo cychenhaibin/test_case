@@ -12,12 +12,12 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/feishu-api/, ''),
       },
       '/case_be': {
-        target: 'http://47.120.6.54:8080',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/case_be/, ''),
       }
     },
   },
-  // base: './',
-  base: '/test_case/',
+  base: './',
+  // base: '/test_case/',
 })

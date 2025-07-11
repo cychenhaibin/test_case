@@ -148,11 +148,13 @@ def Generate(num,flag):
             return date_list
     
     def generate_random_text(num):
-        response=call_llm(f'返回{num}句非常简短（8个字以内）且意思简单的中文文本，你只需要输出这些文本，所有文本被装进一个列表中。注意不是每个文本放进一个列表中。你的参考输出格式如下（文本内容可以多样化）：["简单说明",...]，而不是["简单说明"]\n ...',model="qwen2.5-32b-instruct")
+        response=call_llm(f'返回{num}句非常简短（8个字以内）且意思简单的中文文本，你只需要输出这些文本，所有文本被装进一个[]中。注意不是每个文本放进一个列表中。你的参考输出格式如下（文本内容可以多样化）：["简单说明",...]，而不是["简单说明"]\n ...',model="qwen2.5-32b-instruct")
+        print(response)
         return json.loads(response)
     
     def generate_random_email(num):
-        response=call_llm(f'返回{num}个邮箱地址，你只需要输出这些邮箱地址，所有邮箱地址被装进一个列表中。注意不是每个邮箱地址放进一个列表中。你的参考输出格式如下（文本内容可以多样化）：["example@qq.com",...]，而不是["example@qq.com"]\n ...',model="qwen2.5-32b-instruct")
+        response=call_llm(f'返回{num}个邮箱地址，你只需要输出这些邮箱地址，所有邮箱地址被装进一个列表中。注意不是每个邮箱地址放进一个[]中。你的参考输出格式如下（文本内容可以多样化）：["example@qq.com",...]，而不是["example@qq.com"]\n ...',model="qwen2.5-32b-instruct")
+        print(response)
         return json.loads(response)
     
     def generate_random_area(num,unique):
@@ -194,7 +196,8 @@ def Generate(num,flag):
         return floats
     
     def generate_multilingual_text(num):
-        response=call_llm(f'返回{num}句非常简短（8个字以内）且意思简单的中英文文本，你只需要输出这些文本，所有文本被装进一个列表中。注意不是每个文本放进一个列表中。你的参考输出格式如下（文本内容可以多样化）：[{{"zh_cn":"简单说明","en_us":"simple declaration"}},...]，而不是[{{"zh_cn":"简单说明","en_us":"simple declaration"}}]\n ...',model="qwen2.5-32b-instruct")
+        response=call_llm(f'返回{num}句非常简短（8个字以内）且意思简单的中英文文本，你只需要输出这些文本，所有文本被装进一个[]中。注意不是每个文本放进一个列表中。你的参考输出格式如下（文本内容可以多样化）：[{{"zh_cn":"简单说明","en_us":"simple declaration"}},...]，而不是[{{"zh_cn":"简单说明","en_us":"simple declaration"}}]\n ...',model="qwen2.5-32b-instruct")
+        print(response)
         return json.loads(response)
     
     def generate_random_options(num):
@@ -205,7 +208,8 @@ def Generate(num,flag):
         return [text+"test" for text in normal_text_data]
     
     def generate_rich_text(num):
-        response=call_llm(f'返回{num}句简短的富文本，你只需要输出这些富文本，所有富文本被装进一个列表中。注意不是每个富文本放进一个列表中。你的参考输出格式如下（文本内容可以多样化）：["一句富文本",...]，而不是["一句富文本"]\n ...',model="qwen2.5-32b-instruct")
+        response=call_llm(f'返回{num}句简短的富文本，你只需要输出这些富文本，所有富文本被装进一个列表中。注意不是每个富文本放进一个[]中。你的参考输出格式如下（文本内容可以多样化）：["一句富文本",...]，而不是["一句富文本"]\n ...',model="qwen2.5-32b-instruct")
+        print(response)
         response=json.loads(response)
         ans=[]
         for text in response:

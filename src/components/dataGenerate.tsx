@@ -40,7 +40,7 @@ const DataGenerate: React.FC = () => {
     setGenerating(true);
     setGenerateSuccess(false);
     // 请求接口case_be/test
-    const res = await axios.post('http://47.120.6.54:8080/test', { num, flag: isEmpty ?? false });
+    const res = await axios.post('http://119.29.105.192:8080/test', { num, flag: isEmpty ?? false });
     try {
       const result = res.data.result || [];
       setMockGenerateData(formatGenerateData(result[0]?.generate));
@@ -82,7 +82,7 @@ const DataGenerate: React.FC = () => {
             onClick={handleGenerate}
             disabled={num === undefined}
           >
-            生成测试数据集
+            开始测试
           </Button>
         </div>
         <div style={{paddingLeft: 12}}>
